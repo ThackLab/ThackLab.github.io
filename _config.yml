@@ -1,0 +1,184 @@
+# The Site Configuration
+
+# Import the theme
+theme: jekyll-theme-chirpy
+
+# The language of the webpage
+lang: en
+
+# Change to your timezone
+timezone: Australia/Brisbane
+
+# jekyll-seo-tag settings
+# ↓ --------------------------
+
+title: ThackLab # the main title
+
+tagline: Penetration Testing & CTF Writeups # it will display as the subtitle
+
+description: >- # used by seo meta and the atom feed
+  HackTheBox, TryHackMe, and offensive security walkthroughs
+
+# Fill in the protocol & hostname for your site.
+url: "https://ThackLab.github.io"
+
+github:
+  username: ThackLab
+
+social:
+  name: ThackLab
+  email: # Optional - leave blank
+  links:
+    - https://github.com/ThackLab
+
+# Site Verification Settings
+webmaster_verifications:
+  google: # fill in your Google verification code
+  bing: # fill in your Bing verification code
+  alexa: # fill in your Alexa verification code
+  yandex: # fill in your Yandex verification code
+  baidu: # fill in your Baidu verification code
+  facebook: # fill in your Facebook verification code
+
+# ↑ --------------------------
+# The end of `jekyll-seo-tag` settings
+
+# Web Analytics Settings
+analytics:
+  google:
+    id: # fill in your Google Analytics ID
+  goatcounter:
+    id: thacklab
+  umami:
+    id: # fill in your Umami ID
+    domain: # fill in your Umami domain
+  matomo:
+    id: # fill in your Matomo ID
+    domain: # fill in your Matomo domain
+  cloudflare:
+    id: # fill in your Cloudflare Web Analytics token
+  fathom:
+    id: # fill in your Fathom Site ID
+
+# Page views settings
+pageviews:
+  provider: goatcounter
+
+# Prefer color scheme setting.
+theme_mode: dark # [light | dark]
+
+# The CDN endpoint for media resources.
+cdn:
+
+# the avatar on sidebar, support local or CORS resources
+avatar: /assets/img/avatar.png
+
+# The URL of the site-wide social preview image used in SEO `og:image` meta tag.
+social_preview_image: # string, local or CORS resources
+
+# boolean type, the global switch for TOC in posts.
+toc: true
+
+comments:
+  provider: giscus
+  disqus:
+    shortname:
+  utterances:
+    repo: ThackLab/ThackLab.github.io
+    issue_term:
+  giscus:
+    repo:
+    repo_id: R_kgDONb40ew
+    category: Announcements
+    category_id: DIC_kwDONb40e84ClIo8
+    mapping: pathname
+    strict: 0
+    input_position: bottom
+    lang: en
+    reactions_enabled: 1
+
+# Self-hosted static assets
+assets:
+  self_host:
+    enabled:
+    env:
+
+pwa:
+  enabled: true
+  cache:
+    enabled: true
+    deny_paths:
+
+paginate: 10
+
+baseurl: ""
+
+# ------------ The following options are not recommended to be modified ------------------
+
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - docs
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
