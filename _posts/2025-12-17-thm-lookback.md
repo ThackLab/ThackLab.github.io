@@ -60,15 +60,15 @@ ffuf -w /usr/share/dirbuster/wordlists/directory-list-1.0.txt -u https://10.49.1
 ## Phase 3: Exploitation
 
 Navigating to /test, we're met with a login page:
-![Test Login](/Assets/Images/Lookback/test-login.png)
+![Test Login](/assets/Images/Lookback/test-login.png)
 
 On first try we test admin:admin and get access to the first flag:
-![FLAG1](/Assets/Images/Lookback/flag1.png)
+![FLAG1](/assets/Images/Lookback/flag1.png)
 
 Testing whoami in the user input field shows how the program executes commands:
-![Commands](/Assets/Images/Lookback/com-exe.png)
+![Commands](/assets/Images/Lookback/com-exe.png)
 
-Heres how you input is getting wrapped
+Heres how your input is getting wrapped
 ```powershell
 Get-Content('C:\' + $userInput + ')')
 ```
@@ -83,7 +83,7 @@ Insert command to test:
 ') ; whoami ; #
 ```
 
-![RCE](/Assets/Images/Lookback/rce.png)
+![RCE](/assets/Images/Lookback/rce.png)
 
 Perfect. Heres how that would look on the back end:
 ```powershell
@@ -134,7 +134,7 @@ not out of the woods yet
 ```
 
 3rd time's the charm.
-![cve_2021_40449](/Assets/Images/Lookback/cve.png)
+![cve_2021_40449](/assets/Images/Lookback/cve.png)
 
 
 Grab your well deserved **ROOT FLAG!**
