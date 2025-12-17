@@ -1,7 +1,7 @@
 ---
-title: "THM: Wreath Network - Complete Walkthrough"
-date: 2025-12-17 14:30:00 +1000
-categories: [TryHackMe, Hard]
+title: "THM: Wreath Network"
+date: 2025-12-16 14:30:00 +1000
+categories: [TryHackMe, Easy]
 tags: [pivoting, windows, linux, chisel, sshuttle, mimikatz, gitstack, privilege-escalation]
 ---
 
