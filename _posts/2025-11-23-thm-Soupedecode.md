@@ -5,6 +5,8 @@ categories: [TryHackMe, Medium]
 tags: [windows, active-directory, kerberoasting, pass-the-hash, rid-brute, password-spraying]
 ---
 
+![Banner](/assets/Images/Soupedecode/banner.png)
+
 Windows Active Directory box. Enumerated users via RID brute force with guest access, password sprayed to gain initial foothold, kerberoasted service account, and used pass-the-hash with extracted NTLM hashes for domain admin access.
 
 ## Initial Enumeration

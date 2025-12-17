@@ -5,6 +5,8 @@ categories: [HackTheBox, Easy]
 tags: [windows, smb, cve-2008-4250, ms08-067, metasploit]
 ---
 
+![Banner](/assets/Images/Legacy/banner.png)
+
 Windows XP box vulnerable to MS08_067 SMB exploit providing immediate SYSTEM access without privilege escalation.
 
 ## Enumeration

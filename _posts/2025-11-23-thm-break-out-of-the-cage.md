@@ -5,6 +5,8 @@ categories: [TryHackMe, Medium]
 tags: [linux, steganography, audio-analysis, vigenere-cipher, command-injection, cron, audacity]
 ---
 
+![Banner](/assets/Images/Break-Cage/banner.png)
+
 Linux box with audio steganography hiding a Vigenère cipher key. Exploited command injection in a cron job to gain shell as secondary user, then decoded multi-layer encrypted credentials for root access.
 
 ## Initial Enumeration

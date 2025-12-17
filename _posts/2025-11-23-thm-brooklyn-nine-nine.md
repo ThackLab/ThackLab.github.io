@@ -5,6 +5,8 @@ categories: [TryHackMe, Easy]
 tags: [linux, ssh-bruteforce, steganography, gtfobins, sudo-abuse, hydra, stegseek]
 ---
 
+![Banner](/assets/Images/Brooklyn-Nine-Nine/banner.png)
+
 Linux box with multiple paths to root. Method 1 uses SSH brute force and sudo less abuse. Method 2 leverages steganography to extract credentials and sudo nano exploitation.
 
 ## Method 1: SSH Brute Force → Misconfigured binary privs → Sudo Abuse
