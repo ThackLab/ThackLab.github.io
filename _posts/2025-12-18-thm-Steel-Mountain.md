@@ -53,18 +53,23 @@ OS details: Microsoft Windows Server 2012 or 2012 R2
 On port 80 we find our first flag. Seek the source and you shall find. 
 ![Bill](/assets/Images/Steel-Mountain/bill.png)
 
+
 On port 8080 we've got rejetto http file server which is famously vulnerable and has a metasploit module.
 ![HFS](/assets/Images/Steel-Mountain/hfs.png)
 
+
 ![Rejetto](/assets/Images/Steel-Mountain/rejetto.png)
+
 
 ## Phase 3: Gaining access
 
 A quick speachsploit query shows us the module we need and the CVE
 ![CVE](/assets/Images/Steel-Mountain/cve.png)
 
+
 Quick and easy, we're in.
 ![MSF](/assets/Images/Steel-Mountain/meterpreter1.png)
+
 
 ## Phase 4: Privilege escalation
 
@@ -86,6 +91,7 @@ PS> Invoke-Allchecks
 
 **Results:**
 ![Unquoted](/assets/Images/Steel-Mountain/path.png)
+
 
 **Sidenote:**
 The first dot (.) is the dot-sourcing operator. It executes the script in the current scope so functions like Invoke-AllChecks are available in your session.
@@ -117,6 +123,7 @@ C:\Program Files (x86)\IObit> net start AdvancedSystemCareService9
 You should now have a nt authority\system session.
 ![NT\SYSTEM](/assets/Images/Steel-Mountain/nt.png)
 ![ROOTFLAG](/assets/Images/Steel-Mountain/root.png)
+
 
 ---
 
