@@ -54,7 +54,7 @@ On port 80 we find our first flag. Seek the source and you shall find.
 ![Bill](/assets/Images/Steel-Mountain/bill.png)
 
 On port 8080 we've got rejetto http file server which is famously vulnerable and has a metasploit module.
-![Bill](/assets/Images/Steel-Mountain/hfs.png)
+![HFS](/assets/Images/Steel-Mountain/hfs.png)
 
 ![Rejetto](/assets/Images/Steel-Mountain/rejetto.png)
 
