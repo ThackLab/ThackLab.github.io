@@ -5,7 +5,7 @@ categories: [TryHackMe, Easy]
 tags: [IDOR, Endpoints, Hex, Hash, Web]
 ---
 
-![Banner](/assets/Images/Corridor/banner.jpeg)
+![Banner](/assets/Images/Corridor/banner.png)
 
 ---
 
